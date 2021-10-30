@@ -45,10 +45,12 @@ f = open(".\\duna.txt", "r", encoding='UTF-8')
 duna_text = f.read()
 f.close()
 
+# відкриття/створення файла і запис в нього відфільтрованого тексту
 f = open(".\\Filtered txt\\filtered.txt", "w")
 f.write(Char_filter(duna_text))
 f.close()
 
+# відкриття/створення файла і запис в нього відфільтрованого тексту з пробілами
 f = open(".\\Filtered txt\\filtered_with_space.txt", "w")
 f.write(Char_with_space_filter(duna_text))
 f.close()
