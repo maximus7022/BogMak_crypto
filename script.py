@@ -87,3 +87,69 @@ f = open(".\\Mono&Bigrams\\monograms_with_space.txt", "a")
 for i in range(0, len(chars)+1):
     f.write(Monogram_freq(text_with_space, i))
 f.close()
+
+#\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/БІГРАМИ\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/#
+
+
+def Bigram_freq_1(text, e):        # функція підрахунку частот біграм
+    bigrams = []
+    if e == 0:
+        for i in range(0, len(text)-1):       # формування масиву біграм з перетином
+            b = text[i] + text[i + 1]
+            bigrams.append(b)
+    else:
+        for i in range(0, len(text)-1, 2):       # формування масиву біграм без перетину
+            b = text[i] + text[i + 1]
+            bigrams.append(b)
+
+    u = set()           # формування масиву унікальних біграм
+    unique_bigrams = []
+    for ch in bigrams:
+        u.add(ch)
+    for ch in u:
+        unique_bigrams.append(ch)
+
+    bigram_count = 0
+    for i in range(0, len(unique_bigrams)):  # підрахунок кількості біграм в тексті
+        bigram_count += text.count(unique_bigrams[i])
+
+    unique_bigrams.sort()       # сортування біграм
+
+    for i in range(0, len(unique_bigrams)):     # підрахунок
+        freq = text.count(unique_bigrams[i]) / bigram_count
+        res_str = unique_bigrams[i] + "  -->  " + str(freq) + "\n"
+        f.write(res_str)
+    return res_str
+
+
+# біграми з перетином
+if os.path.exists(".\\Mono&Bigrams\\bigrams_1.txt"):
+    os.remove(".\\Mono&Bigrams\\bigrams_1.txt")
+
+f = open(".\\Mono&Bigrams\\bigrams_1.txt", "a")
+Bigram_freq_1(text, 0)
+f.close()
+
+# біграми з перетином з пробілами
+if os.path.exists(".\\Mono&Bigrams\\bigrams_with_space_1.txt"):
+    os.remove(".\\Mono&Bigrams\\bigrams_with_space_1.txt")
+
+f = open(".\\Mono&Bigrams\\bigrams_with_space_1.txt", "a")
+Bigram_freq_1(text_with_space, 0)
+f.close()
+
+# біграми без перетину
+if os.path.exists(".\\Mono&Bigrams\\bigrams_2.txt"):
+    os.remove(".\\Mono&Bigrams\\bigrams_2.txt")
+
+f = open(".\\Mono&Bigrams\\bigrams_2.txt", "a")
+Bigram_freq_1(text, 1)
+f.close()
+
+# біграми без перетину з пробілами
+if os.path.exists(".\\Mono&Bigrams\\bigrams_with_space_2.txt"):
+    os.remove(".\\Mono&Bigrams\\bigrams_with_space_2.txt")
+
+f = open(".\\Mono&Bigrams\\bigrams_with_space_2.txt", "a")
+Bigram_freq_1(text_with_space, 1)
+f.close()
