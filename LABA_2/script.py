@@ -90,7 +90,8 @@ def find_key(text):  # ф-я знаходження довжини ключа
         # підрахунок середнього значення індексу для кожного періоду
             average_index += index_f(parts[-1])
         average_index /= i
-        #print(str(i) + ": " + str(average_index))
+        s = "r" + "(" + str(i) + ")" + ": " + str(average_index) + "\n"
+        f.write(s)
         average_index = 0
 
     # за результатами експерименту
@@ -139,8 +140,12 @@ def decode(text, key):  # ф-я розшифрування
     return ''.join(A)
 
 
+if os.path.exists(".\\average_indexes.txt"):
+    os.remove(".\\average_indexes.txt")
+f = open(".\\average_indexes.txt", "a")
 # виклик знаходження ключа
 find_key(e_text)
+f.close()
 
 # тут методом перебору ми замінювали деякі букви отриманого ключа
 # для отримання коректного результату
