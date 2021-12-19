@@ -1,5 +1,5 @@
-import os
-import itertools
+import os   # для перезапису файлів
+import itertools  # для отримання перестановок
 
 chars = ['а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о',
          'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ы', 'э', 'ю', 'я']
@@ -122,13 +122,16 @@ max_freq_ru = ['ст', 'но', 'ен', 'то', 'на']    # from gogle
 max_freq_sht = Find_max_freq_bigrams(Get_bigram_array(e_text))
 ind_ru = Get_bigram_values(max_freq_ru)
 ind_sht = Get_bigram_values(max_freq_sht)
+print("\nMost frequent bigrams in russian lang:")
 print(max_freq_ru)
 print(ind_ru)
+print("\nMost frequent bigrams in cyphertext:")
 print(max_freq_sht)
 print(ind_sht)
 
 keys = Find_keys(ind_ru, ind_sht)
-# print(keys)
+print("\nAll keys:")
+print(keys)
 
 # формування списку можливих істинних відкритих текстів
 text_variants = []
@@ -154,7 +157,8 @@ def index_f(text):    # ф-я знаходження індексів відпо
 indexes = []
 for text in text_variants:
     indexes.append(index_f(text))
-# print(indexes)
+print("\nF_Indexes for texts decrypted with these keys:")
+print(indexes)
 for i in range(len(indexes)):
     if indexes[i] > 0.05 and indexes[i] < 0.06:
         # print(keys[i])
@@ -163,4 +167,5 @@ for i in range(len(indexes)):
         f = open(".\\05_text.txt", "w")
         f.write(str)
         f.close()
+        print("\nCorrect key and decrypted text were written to file!")
         break
